@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const API = import.meta.env.VITE_BACKEND_URL || "";
 
@@ -34,27 +35,37 @@ export default function BMICalculator() {
   return (
     <section id="bmi" className="py-20 bg-white">
       <div className="max-w-3xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Калькулятор ИМТ</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-rose-950">Калькулятор ИМТ</h2>
         <p className="text-slate-600 mt-2">Рассчитайте индекс массы тела и узнайте свою категорию.</p>
 
-        <div className="mt-8 grid sm:grid-cols-3 gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="mt-8 grid sm:grid-cols-3 gap-4"
+        >
           <div>
             <label className="text-sm text-slate-600">Рост (см)</label>
-            <input type="number" value={height} onChange={e=>setHeight(e.target.value)} className="w-full mt-1 px-3 py-2 rounded-xl ring-1 ring-slate-300 focus:ring-sky-400 outline-none" />
+            <input type="number" value={height} onChange={e=>setHeight(e.target.value)} className="w-full mt-1 px-3 py-2 rounded-xl ring-1 ring-slate-300 focus:ring-rose-400 outline-none" />
           </div>
           <div>
             <label className="text-sm text-slate-600">Вес (кг)</label>
-            <input type="number" value={weight} onChange={e=>setWeight(e.target.value)} className="w-full mt-1 px-3 py-2 rounded-xl ring-1 ring-slate-300 focus:ring-sky-400 outline-none" />
+            <input type="number" value={weight} onChange={e=>setWeight(e.target.value)} className="w-full mt-1 px-3 py-2 rounded-xl ring-1 ring-slate-300 focus:ring-rose-400 outline-none" />
           </div>
           <div className="flex items-end">
-            <button onClick={handleCalc} className="w-full px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-medium">Рассчитать</button>
+            <button onClick={handleCalc} className="w-full px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-medium">Рассчитать</button>
           </div>
-        </div>
+        </motion.div>
 
         {result && (
-          <div className="mt-6 p-4 rounded-xl bg-sky-50 ring-1 ring-sky-200 text-sky-900">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-6 p-4 rounded-xl bg-rose-50 ring-1 ring-rose-200 text-rose-900"
+          >
             Ваш ИМТ: <span className="font-semibold">{result.bmi}</span>{result.category ? ` — ${result.category}` : ''}
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

@@ -1,6 +1,8 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import About from "./components/About";
 import Services from "./components/Services";
+import SleeveAnimation from "./components/SleeveAnimation";
 import Testimonials from "./components/Testimonials";
 import BeforeAfter from "./components/BeforeAfter";
 import BMICalculator from "./components/BMICalculator";
@@ -11,7 +13,9 @@ function App() {
     <div className="min-h-screen bg-slate-950">
       <Navbar />
       <Hero />
+      <About />
       <Services />
+      <SleeveAnimation />
       <Testimonials />
       <BeforeAfter />
       <BMICalculator />

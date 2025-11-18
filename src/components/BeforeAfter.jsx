@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const API = import.meta.env.VITE_BACKEND_URL || "";
 
@@ -17,18 +18,25 @@ export default function BeforeAfter() {
   return (
     <section id="results" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Результаты «до/после»</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-rose-950">Результаты «до/после»</h2>
         <p className="text-slate-600 mt-2">Некоторые иллюстративные примеры послеоперационных изменений.</p>
 
         <div className="grid md:grid-cols-2 gap-6 mt-10">
           {data.map((i, idx) => (
-            <div key={idx} className="rounded-2xl overflow-hidden ring-1 ring-slate-200 bg-white">
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              className="rounded-2xl overflow-hidden ring-1 ring-slate-200 bg-white shadow-sm hover:shadow-xl transition"
+            >
               <div className="grid grid-cols-2">
                 <div className="aspect-[4/3] bg-slate-100" style={{backgroundImage:`url(${i.image_before_url})`, backgroundSize:'cover', backgroundPosition:'center'}} />
                 <div className="aspect-[4/3] bg-slate-100" style={{backgroundImage:`url(${i.image_after_url})`, backgroundSize:'cover', backgroundPosition:'center'}} />
               </div>
               <div className="p-4 text-slate-700">{i.description}</div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
